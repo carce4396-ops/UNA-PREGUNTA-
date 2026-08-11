@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d080b">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="description" content="Una pequeña sorpresa para Valeria.">
+  <title>Para Valeria ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="hearts" aria-hidden="true"></div>
+
+  <!-- Pantalla de acceso -->
+  <section id="gate" class="screen gate-screen">
+    <div class="gate-card">
+      <div class="tiny-heart">♡</div>
+      <p class="eyebrow">Una pequeña sorpresa</p>
+      <h1>Antes de entrar...</h1>
+      <p class="gate-subtitle">Hay una pregunta que solamente tú deberías poder responder.</p>
+
+      <form id="secretForm" autocomplete="off">
+        <label for="answer">¿Qué es lo que más odio en una comida?</label>
+        <input id="answer" type="text" placeholder="Escribe tu respuesta..." spellcheck="false" autocapitalize="none" required>
+        <button class="primary-btn" type="submit">Entrar ❤️</button>
+        <p id="error" class="error" role="alert"></p>
+      </form>
+
+      <p class="hint">Pista: es algo que definitivamente no quiero encontrar en mi plato.</p>
+    </div>
+  </section>
+
+  <!-- Experiencia -->
+  <main id="experience" class="hidden">
+    <section class="hero section">
+      <div class="hero-photo">
+        <img src="assets/foto1.jpg" alt="Un recuerdo juntos">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content reveal">
+        <p class="eyebrow">Para ti, Valeria</p>
+        <h2>Hay caminos que uno simplemente <em>siente</em>.</h2>
+        <p class="lead">Y durante este tiempo que estuvimos saliendo de nuevo, jamás dudé de que este era el camino que quería recorrer.</p>
+        <button id="scrollBtn" class="ghost-btn">Quiero contarte algo ↓</button>
+      </div>
+    </section>
+
+    <section class="letter section">
+      <div class="section-inner">
+        <div class="photo-frame reveal">
+          <img src="assets/foto2.jpg" alt="Otro recuerdo juntos">
+          <span class="photo-caption">Nosotros, tal como somos.</span>
+        </div>
+
+        <article class="letter-card reveal">
+          <p class="eyebrow">Una carta para ti</p>
+          <h2>Valeria,</h2>
+          <p>
+            En este pequeño detalle, que aunque no es algo extraordinario,
+            puse todo el cariño del mundo. Hemos pasado por tanto para poder
+            estar justo en este momento, y por eso quería hacer algo que
+            pudiera guardar un pedacito de todo lo que siento por ti.
+          </p>
+          <p>
+            A veces soy complicado de entender y sé que he tenido actitudes
+            erróneas, pero créeme cuando te digo que estoy intentando mejorar
+            cada día, por mí y también por nosotros.
+          </p>
+          <p>
+            Eres mi persona especial, aquella con la que soñé tantas veces.
+            Te convertiste en el amor de mi vida. Me enamoré de ti
+            perdidamente y, cada día que pasa, cada vez que miro esos ojitos
+            tan lindos, vuelvo a enamorarme un poquito más.
+          </p>
+          <p>
+            Y muchas veces pienso: <em>¿qué hice bien para poder tener a una
+            mujer tan linda e increíble a mi lado?</em>
+          </p>
+          <p class="signature">
+            Te amo muchísimo, con todo mi corazón.
+            <span>— Valeria</span>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="promise section">
+      <div class="promise-inner reveal">
+        <span class="ornament">✦</span>
+        <p class="eyebrow">Lo que realmente quería decirte</p>
+        <h2>Juntos.<br><em>A tu lado.</em></h2>
+        <p>
+          Porque si algo tengo claro después de todo este tiempo,
+          es que quiero seguir construyendo momentos contigo.
+        </p>
+      </div>
+    </section>
+
+    <section class="question section">
+      <div class="question-inner reveal">
+        <div class="ring">♡</div>
+        <p class="eyebrow">Y ahora sí...</p>
+        <h2>Valeria,</h2>
+        <h3>¿Puedo ser tu novio?</h3>
+        <p class="final-text">
+          ¿Me dejarías tener el privilegio de decirle al mundo
+          que estoy al lado de la mujer de mi vida,
+          de mis sueños, del amor de mi vida?
+        </p>
+
+        <div class="choices">
+          <button id="yesBtn" class="yes-btn">Sí, quiero ❤️</button>
+          <button id="thinkBtn" class="think-btn">Déjame pensarlo</button>
+        </div>
+        <p id="choiceMessage" class="choice-message"></p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Hecho con todo mi corazón para Valeria.</p>
+      <p class="small">Locos · León Larregui ♫</p>
+    </footer>
+  </main>
+
+  <!-- Reproductor oficial de YouTube. El audio se inicia después de una interacción del usuario. -->
+  <div id="youtubePlayer" class="youtube-player" aria-hidden="true"></div>
+
+  <div id="celebration" class="celebration hidden">
+    <div class="celebration-card">
+      <div class="big-heart">♥</div>
+      <p class="eyebrow">Entonces...</p>
+      <h2>Tenemos una historia que seguir escribiendo. ❤️</h2>
+      <p>Y prometo disfrutar cada capítulo contigo.</p>
+      <button id="closeCelebration" class="primary-btn">Volver a nosotros</button>
+    </div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>
