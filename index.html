@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0d080b">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="description" content="Una pequeña sorpresa para Valeria.">
   <title>Para Valeria ❤️</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +14,6 @@
 <body>
   <div id="hearts" aria-hidden="true"></div>
 
-  <!-- Pantalla de acceso -->
   <section id="gate" class="screen gate-screen">
     <div class="gate-card">
       <div class="tiny-heart">♡</div>
@@ -34,7 +32,6 @@
     </div>
   </section>
 
-  <!-- Experiencia -->
   <main id="experience" class="hidden">
     <section class="hero section">
       <div class="hero-photo">
@@ -44,7 +41,7 @@
       <div class="hero-content reveal">
         <p class="eyebrow">Para ti, Valeria</p>
         <h2>Hay caminos que uno simplemente <em>siente</em>.</h2>
-        <p class="lead">Y durante este tiempo que estuvimos saliendo de nuevo, jamás dudé de que este era el camino que quería recorrer.</p>
+        <p class="lead">Y durante este tiempo que estuvimos saliendo de nuevo, jamás dudé de que este era el camino que quería recorrer: un camino a tu lado, juntos.</p>
         <button id="scrollBtn" class="ghost-btn">Quiero contarte algo ↓</button>
       </div>
     </section>
@@ -59,31 +56,11 @@
         <article class="letter-card reveal">
           <p class="eyebrow">Una carta para ti</p>
           <h2>Valeria,</h2>
-          <p>
-            En este pequeño detalle, que aunque no es algo extraordinario,
-            puse todo el cariño del mundo. Hemos pasado por tanto para poder
-            estar justo en este momento, y por eso quería hacer algo que
-            pudiera guardar un pedacito de todo lo que siento por ti.
-          </p>
-          <p>
-            A veces soy complicado de entender y sé que he tenido actitudes
-            erróneas, pero créeme cuando te digo que estoy intentando mejorar
-            cada día, por mí y también por nosotros.
-          </p>
-          <p>
-            Eres mi persona especial, aquella con la que soñé tantas veces.
-            Te convertiste en el amor de mi vida. Me enamoré de ti
-            perdidamente y, cada día que pasa, cada vez que miro esos ojitos
-            tan lindos, vuelvo a enamorarme un poquito más.
-          </p>
-          <p>
-            Y muchas veces pienso: <em>¿qué hice bien para poder tener a una
-            mujer tan linda e increíble a mi lado?</em>
-          </p>
-          <p class="signature">
-            Te amo muchísimo, con todo mi corazón.
-            <span>— Valeria</span>
-          </p>
+          <p>En este pequeño detalle, que aunque no es algo extraordinario, puse todo el cariño del mundo. Hemos pasado por tanto para poder estar justo en este momento, y por eso quería hacer algo que pudiera guardar un pedacito de todo lo que siento por ti.</p>
+          <p>A veces soy complicado de entender y sé que he tenido actitudes erróneas, pero créeme cuando te digo que estoy intentando mejorar cada día, por mí y también por nosotros.</p>
+          <p>Eres mi persona especial, aquella con la que soñé tantas veces. Te convertiste en el amor de mi vida. Me enamoré de ti perdidamente y, cada día que pasa, cada vez que miro esos ojitos tan lindos, vuelvo a enamorarme un poquito más.</p>
+          <p>Y muchas veces pienso: <em>¿qué hice bien para poder tener a una mujer tan linda e increíble a mi lado?</em></p>
+          <p class="signature">TE AMO MUCHÍSIMO, CON TODO MI CORAZÓN.<span>— Valeria</span></p>
         </article>
       </div>
     </section>
@@ -93,10 +70,7 @@
         <span class="ornament">✦</span>
         <p class="eyebrow">Lo que realmente quería decirte</p>
         <h2>Juntos.<br><em>A tu lado.</em></h2>
-        <p>
-          Porque si algo tengo claro después de todo este tiempo,
-          es que quiero seguir construyendo momentos contigo.
-        </p>
+        <p>Porque si algo tengo claro después de todo este tiempo, es que quiero seguir construyendo momentos contigo.</p>
       </div>
     </section>
 
@@ -106,11 +80,7 @@
         <p class="eyebrow">Y ahora sí...</p>
         <h2>Valeria,</h2>
         <h3>¿Puedo ser tu novio?</h3>
-        <p class="final-text">
-          ¿Me dejarías tener el privilegio de decirle al mundo
-          que estoy al lado de la mujer de mi vida,
-          de mis sueños, del amor de mi vida?
-        </p>
+        <p class="final-text">¿Me dejarías tener el privilegio de decirle al mundo que estoy al lado de la mujer de mi vida, de mis sueños, del amor de mi vida?</p>
 
         <div class="choices">
           <button id="yesBtn" class="yes-btn">Sí, quiero ❤️</button>
@@ -126,8 +96,12 @@
     </footer>
   </main>
 
-  <!-- Reproductor oficial de YouTube. El audio se inicia después de una interacción del usuario. -->
-  <div id="youtubePlayer" class="youtube-player" aria-hidden="true"></div>
+  <div id="musicBox" class="music-box" aria-live="polite">
+    <button id="musicBtn" type="button">♫ Tocar música</button>
+    <span id="musicStatus">Locos · León Larregui</span>
+  </div>
+
+  <div id="musicFrame" class="music-frame" aria-hidden="true"></div>
 
   <div id="celebration" class="celebration hidden">
     <div class="celebration-card">
@@ -139,7 +113,6 @@
     </div>
   </div>
 
-  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js"></script>
 </body>
 </html>

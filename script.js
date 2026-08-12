@@ -1,136 +1,123 @@
-let ytPlayer = null;
-let ytReady = false;
+const secretForm = document.getElementById("secretForm");
+const answer = document.getElementById("answer");
+const error = document.getElementById("error");
+const gate = document.getElementById("gate");
+const experience = document.getElementById("experience");
+const musicFrame = document.getElementById("musicFrame");
+const musicBtn = document.getElementById("musicBtn");
+const musicStatus = document.getElementById("musicStatus");
+const scrollBtn = document.getElementById("scrollBtn");
+const yesBtn = document.getElementById("yesBtn");
+const thinkBtn = document.getElementById("thinkBtn");
+const choiceMessage = document.getElementById("choiceMessage");
+const celebration = document.getElementById("celebration");
+const closeCelebration = document.getElementById("closeCelebration");
+const hearts = document.getElementById("hearts");
 
-function onYouTubeIframeAPIReady() {
-  ytPlayer = new YT.Player('youtubePlayer', {
-    videoId: 'SXcFYnHSG08',
-    playerVars: {
-      autoplay: 0,
-      controls: 0,
-      loop: 1,
-      playlist: 'SXcFYnHSG08',
-      playsinline: 1,
-      rel: 0
-    },
-    events: {
-      onReady: () => { ytReady = true; }
-    }
-  });
-}
+const videoId = "SXcFYnHSG08";
+let musicPlaying = false;
 
-const gate = document.getElementById('gate');
-const experience = document.getElementById('experience');
-const form = document.getElementById('secretForm');
-const answer = document.getElementById('answer');
-const error = document.getElementById('error');
-const scrollBtn = document.getElementById('scrollBtn');
-const yesBtn = document.getElementById('yesBtn');
-const thinkBtn = document.getElementById('thinkBtn');
-const choiceMessage = document.getElementById('choiceMessage');
-const celebration = document.getElementById('celebration');
-const closeCelebration = document.getElementById('closeCelebration');
-
-function normalize(text) {
-  return text
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim()
+function normalize(value) {
+  return value
     .toLowerCase()
-    .replace(/\s+/g, ' ');
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
 
-form.addEventListener('submit', (e) => {
+function startMusic() {
+  musicFrame.innerHTML = `
+    <iframe
+      id="ytMusic"
+      width="2"
+      height="2"
+      src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&loop=1&playlist=${videoId}&controls=0&rel=0&modestbranding=1"
+      title="Locos - León Larregui"
+      allow="autoplay; encrypted-media"
+      frameborder="0">
+    </iframe>`;
+  musicPlaying = true;
+  musicBtn.textContent = "♫ Música sonando";
+  musicStatus.textContent = "Locos · León Larregui";
+}
+
+function showMusicButton() {
+  musicBtn.textContent = musicPlaying ? "♫ Música sonando" : "♫ Tocar música";
+}
+
+secretForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // Se acepta "pimentón", "pimenton" y espacios extra.
-  if (normalize(answer.value) === 'pimenton') {
-    error.textContent = '';
-    gate.classList.add('hidden');
-    experience.classList.remove('hidden');
-    document.body.style.overflowY = 'auto';
+  if (normalize(answer.value) === "pimenton") {
+    error.textContent = "";
+    gate.classList.add("hidden");
+    experience.classList.remove("hidden");
+    document.body.classList.add("experience-open");
 
-    // La entrada al sitio ocurre por un clic, por lo que intentamos iniciar
-    // la canción oficial embebida de YouTube.
+    // The user has just interacted with the page, so this is the best
+    // moment for the browser to allow YouTube autoplay with sound.
+    startMusic();
+
     setTimeout(() => {
-      if (ytReady && ytPlayer && ytPlayer.playVideo) {
-        try { ytPlayer.playVideo(); } catch (_) {}
-      }
-    }, 500);
-
-    observeReveals();
-    startHearts();
-    setTimeout(() => document.querySelector('.hero').scrollIntoView({behavior:'smooth'}), 80);
+      document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+    }, 250);
   } else {
-    error.textContent = 'Mmm... esa no es la respuesta. Inténtalo otra vez ❤️';
+    error.textContent = "Mmm... esa no es la respuesta ❤️";
     answer.select();
   }
 });
 
-scrollBtn.addEventListener('click', () => {
-  document.querySelector('.letter').scrollIntoView({behavior:'smooth'});
-});
-
-yesBtn.addEventListener('click', () => {
-  celebration.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-  burstHearts(55);
-  if (ytReady && ytPlayer && ytPlayer.playVideo) {
-    try { ytPlayer.playVideo(); } catch (_) {}
+musicBtn.addEventListener("click", () => {
+  if (!musicPlaying) {
+    startMusic();
+  } else {
+    const iframe = document.getElementById("ytMusic");
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: "command",
+        func: "pauseVideo",
+        args: []
+      }), "*");
+    }
+    musicPlaying = false;
+    musicBtn.textContent = "♫ Volver a poner música";
+    musicStatus.textContent = "Locos · León Larregui";
   }
 });
 
-thinkBtn.addEventListener('click', () => {
-  choiceMessage.textContent = 'Tómate tu tiempo. Lo importante para mí es que tu respuesta sea sincera. ❤️';
+scrollBtn.addEventListener("click", () => {
+  document.querySelector(".letter").scrollIntoView({behavior:"smooth"});
 });
 
-closeCelebration.addEventListener('click', () => {
-  celebration.classList.add('hidden');
-  document.body.style.overflow = 'auto';
-  document.querySelector('.question').scrollIntoView({behavior:'smooth'});
+thinkBtn.addEventListener("click", () => {
+  choiceMessage.textContent = "Está bien... pero yo aquí voy a esperar ese sí ❤️";
+  thinkBtn.textContent = "Piénsalo bien 😌";
 });
 
-function observeReveals() {
-  const items = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
-    });
-  }, {threshold: .16});
-  items.forEach(item => io.observe(item));
+yesBtn.addEventListener("click", () => {
+  celebration.classList.remove("hidden");
+  for (let i = 0; i < 28; i++) createHeart();
+});
+
+closeCelebration.addEventListener("click", () => {
+  celebration.classList.add("hidden");
+});
+
+function createHeart() {
+  const h = document.createElement("span");
+  h.className = "float-heart";
+  h.textContent = Math.random() > .35 ? "♥" : "♡";
+  h.style.left = `${Math.random()*100}%`;
+  h.style.fontSize = `${12 + Math.random()*24}px`;
+  h.style.animationDuration = `${4 + Math.random()*5}s`;
+  hearts.appendChild(h);
+  setTimeout(() => h.remove(), 9500);
 }
 
-function spawnHeart() {
-  const h = document.createElement('div');
-  h.className = 'heart-particle';
-  h.textContent = Math.random() > .5 ? '♡' : '♥';
-  h.style.left = Math.random() * 100 + 'vw';
-  h.style.bottom = '-25px';
-  h.style.fontSize = (10 + Math.random() * 16) + 'px';
-  h.style.animationDuration = (5 + Math.random() * 4) + 's';
-  document.getElementById('hearts').appendChild(h);
-  setTimeout(() => h.remove(), 10000);
-}
-function startHearts() {
-  setInterval(spawnHeart, 1100);
-}
-function burstHearts(n) {
-  for (let i = 0; i < n; i++) {
-    setTimeout(() => {
-      const h = document.createElement('div');
-      h.className = 'heart-particle';
-      h.textContent = Math.random() > .35 ? '♥' : '♡';
-      h.style.left = (30 + Math.random() * 40) + 'vw';
-      h.style.bottom = (20 + Math.random() * 35) + 'vh';
-      h.style.fontSize = (12 + Math.random() * 22) + 'px';
-      h.style.animationDuration = (2.5 + Math.random() * 3) + 's';
-      document.getElementById('hearts').appendChild(h);
-      setTimeout(() => h.remove(), 7000);
-    }, i * 25);
-  }
-}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
+  });
+}, {threshold:0.12});
 
-// Por seguridad visual: la pantalla inicial no hace scroll detrás del acceso.
-document.body.style.overflow = 'hidden';
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
